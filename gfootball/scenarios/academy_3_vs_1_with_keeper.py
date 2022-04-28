@@ -18,6 +18,7 @@
 
 
 from . import *
+from numpy import random as rnd
 
 
 def build_scenario(builder):
@@ -31,9 +32,21 @@ def build_scenario(builder):
 
   builder.SetTeam(Team.e_Left)
   builder.AddPlayer(-1.0, 0.0, e_PlayerRole_GK)
-  builder.AddPlayer(0.6, 0.0, e_PlayerRole_CM)
-  builder.AddPlayer(0.7, 0.2, e_PlayerRole_CM)
-  builder.AddPlayer(0.7, -0.2, e_PlayerRole_CM)
+
+  if builder._config['random_init']:
+    rnd_range = 0.05
+    ori_pos = [[0.6,0.0],[0.7,0.2],[0.7,-0.2]]
+    for i in range(3):
+      epsilon0 = rnd.uniform(-rnd_range, rnd_range)
+      epsilon1 = rnd.uniform(-rnd_range*0.42, rnd_range*0.42)
+      pos = [ori_pos[i][0] + epsilon0, ori_pos[i][1]+epsilon1]
+      builder.AddPlayer(pos[0],pos[1],e_PlayerRole_CM)
+    # for _ in range(3):
+    #   builder.AddPlayer(rnd.uniform(0.4,0.9), rnd.uniform(-0.3,0.3), e_PlayerRole_CM)
+  else:
+    builder.AddPlayer(0.6, 0.0, e_PlayerRole_CM)
+    builder.AddPlayer(0.7, 0.2, e_PlayerRole_CM)
+    builder.AddPlayer(0.7, -0.2, e_PlayerRole_CM)
 
   builder.SetTeam(Team.e_Right)
   builder.AddPlayer(-1.0, 0.0, e_PlayerRole_GK)
