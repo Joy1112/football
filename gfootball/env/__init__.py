@@ -103,7 +103,7 @@ def create_environment(env_name='',
                            observation_preprocessing.SMM_WIDTH,
                            observation_preprocessing.SMM_HEIGHT),
                        other_config_options={},
-                       random_init = False):
+                       scenario_cfg = None):
   """Creates a Google Research Football environment.
 
   Args:
@@ -180,7 +180,7 @@ def create_environment(env_name='',
   """
   assert env_name
 
-  scenario_config = config.Config({'level': env_name, 'random_init': random_init}).ScenarioConfig()
+  scenario_config = config.Config({'level': env_name, 'scenario_cfg': scenario_cfg}).ScenarioConfig()
   players = [('agent:left_players=%d,right_players=%d' % (
       number_of_left_players_agent_controls,
       number_of_right_players_agent_controls))]
@@ -206,7 +206,7 @@ def create_environment(env_name='',
       'level': env_name,
       'tracesdir': logdir,
       'write_video': write_video,
-      'random_init': random_init,
+      'scenario_cfg': scenario_cfg,
   }
   config_values.update(other_config_options)
   c = config.Config(config_values)
