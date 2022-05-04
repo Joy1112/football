@@ -43,7 +43,6 @@ def build_scenario(builder):
     ori_pos = [[0.6,0.0],[0.7,0.2],[0.7,-0.2]]
   if cfg.get('random_init', False):
     rnd_range = cfg.get('random_scale')
-    ori_pos = [[0.6,0.0],[0.7,0.2],[0.7,-0.2]]
     for i in range(3):
       epsilon0 = rnd.uniform(-rnd_range, rnd_range)
       epsilon1 = rnd.uniform(-rnd_range*0.42, rnd_range*0.42)
