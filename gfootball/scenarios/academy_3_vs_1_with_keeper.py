@@ -34,13 +34,15 @@ def build_scenario(builder):
     builder.config().end_episode_on_possession_change = False
   else:
     builder.config().end_episode_on_possession_change = True
-  builder.SetBallPosition(0.62, 0.0)
+  
   builder.SetTeam(Team.e_Left)
   builder.AddPlayer(-1.0, 0.0, e_PlayerRole_GK)
   if cfg.get('full_court', False):
     ori_pos = [[0.2,0.0],[-0.5,0.2],[-0.5,-0.2]]
+    builder.SetBallPosition(0.0, 0.0)
   else:
     ori_pos = [[0.6,0.0],[0.7,0.2],[0.7,-0.2]]
+    builder.SetBallPosition(0.62, 0.0)
   if cfg.get('random_init', False):
     rnd_range = cfg.get('random_scale')
     for i in range(3):
